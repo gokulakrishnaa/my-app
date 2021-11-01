@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
-function App() {
+export default function App() {
+  const details = [
+    {
+      name: "gokul",
+      image:
+        "https://hs-marketing.imgix.net/images/blog/steve-jobs.jpg?auto=compress&fit=scale&w=1600&dpr=1",
+    },
+    {
+      name: "steve",
+      image:
+        "https://hs-marketing.imgix.net/images/blog/steve-jobs.jpg?auto=compress&fit=scale&w=1600&dpr=1",
+    },
+    {
+      name: "elon",
+      image:
+        "https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5OTk2ODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg",
+    },
+  ];
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {details.map((nm) => (
+        <Msg name={nm.name} image={nm.image} />
+      ))}
     </div>
   );
 }
 
-export default App;
+function Msg({ name, image }) {
+  return (
+    <div>
+      <img className="pic" src={image} alt={name} />
+      <h1>hello {name} 😍</h1>
+    </div>
+  );
+}
