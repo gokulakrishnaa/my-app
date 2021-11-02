@@ -8,3 +8,43 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+.display-movie {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  margin: 40px;
+  background-image: linear-gradient(
+    to right top,
+    #a19dca,
+    #4f9dd1,
+    #009db8,
+    #009579,
+    #288621
+  );
+}
+
+.movie-name {
+  letter-spacing: 5px;
+  font-size: 3rem;
+}
+
+.movie-poster {
+  height: 300px;
+  width: 300px;
+  object-fit: contain;
+}
+
+.movie-rating {
+  font-size: 25px;
+}
+
+.movie-summary {
+  align-items: center;
+  padding: 0px 10rem;
+  letter-spacing: 2px;
+}
