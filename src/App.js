@@ -1,40 +1,40 @@
 import "./App.css";
 
-function App() {
-  const details = [
-    {
-      name: "gokul",
-      image:
-        "https://hs-marketing.imgix.net/images/blog/steve-jobs.jpg?auto=compress&fit=scale&w=1600&dpr=1",
-    },
-    {
-      name: "steve",
-      image:
-        "https://hs-marketing.imgix.net/images/blog/steve-jobs.jpg?auto=compress&fit=scale&w=1600&dpr=1",
-    },
-    {
-      name: "elon",
-      image:
-        "https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5OTk2ODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg",
-    },
-  ];
-  return (
-    <div className="App">
-      {details.map((nm) => (
-        <Msg name={nm.name} image={nm.image} />
-      ))}
-    </div>
-  );
-}
+// function App() {
+//   const details = [
+//     {
+//       name: "gokul",
+//       image:
+//         "https://hs-marketing.imgix.net/images/blog/steve-jobs.jpg?auto=compress&fit=scale&w=1600&dpr=1",
+//     },
+//     {
+//       name: "steve",
+//       image:
+//         "https://hs-marketing.imgix.net/images/blog/steve-jobs.jpg?auto=compress&fit=scale&w=1600&dpr=1",
+//     },
+//     {
+//       name: "elon",
+//       image:
+//         "https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5OTk2ODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg",
+//     },
+//   ];
+//   return (
+//     <div className="App">
+//       {details.map((nm) => (
+//         <Msg name={nm.name} image={nm.image} />
+//       ))}
+//     </div>
+//   );
+// }
 
-function Msg({ name, image }) {
-  return (
-    <div>
-      <img className="pic" src={image} alt={name} />
-      <h1>hello {name} 😍</h1>
-    </div>
-  );
-}
+// function Msg({ name, image }) {
+//   return (
+//     <div>
+//       <img className="pic" src={image} alt={name} />
+//       <h1>hello {name} 😍</h1>
+//     </div>
+//   );
+// }
 
 export default function Movie() {
   const movies = [
