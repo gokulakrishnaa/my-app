@@ -54,7 +54,7 @@ export default function Movie() {
     },
     {
       name: "Nayagan",
-      poster: "https://pbs.twimg.com/media/FCN_qVuVEAIo2aW.jpg",
+      poster: "https://pbs.twimg.com/media/Cjxpt7aVEAAOfts.jpg",
       rating: "8.7/10",
       summary:
         "Velu Nayakan, who witnesses the brutal murder of his father, kills a corrupt policeman and escapes to Mumbai, only to become a gangster.",
