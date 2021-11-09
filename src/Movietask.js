@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Counter } from "./Counter";
 import Button from "@mui/material/Button";
 
-export function Movie() {
+export function Movietask() {
   const movies = [
     {
       name: "Dark Knight Rises",
@@ -67,7 +67,7 @@ export function Movie() {
   return (
     <div className="Movie-App">
       {movies.map((data) => (
-        <Display
+        <Displaylist
           name={data.name}
           poster={data.poster}
           rating={data.rating}
@@ -78,7 +78,7 @@ export function Movie() {
   );
 }
 
-function Display({ name, poster, rating, summary }) {
+function Displaylist({ name, poster, rating, summary }) {
   const [show, setShow] = useState(true);
   const styles = { color: rating > 8 ? "green" : "blue", fontWeight: "bold" };
   const summaryStyles = { display: show ? "block" : "none" };

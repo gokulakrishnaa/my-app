@@ -58,3 +58,13 @@ body {
   gap: 10px;
   width: 200px;
 }
+
+.movie-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 80%;
+  justify-content: center;
+  margin: 20px;
+  padding: 10px;
+}

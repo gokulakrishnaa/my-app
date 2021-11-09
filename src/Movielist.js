@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Counter } from "./Counter";
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
-export function Movie() {
+export function Movielist() {
   const movies = [
     {
       name: "Dark Knight Rises",
@@ -64,10 +65,49 @@ export function Movie() {
         "Cobb steals information from his targets by entering their dreams. Saito offers to wipe clean Cobb's criminal history as payment for performing an inception on his sick competitor's son.",
     },
   ];
+  const [moviename, setMoviename] = useState("");
+  const [poster, setPoster] = useState("");
+  const [summary, setSummary] = useState("");
+  const [rating, setRating] = useState("");
+  const movie = {
+    name: moviename,
+    poster: poster,
+    rating: rating,
+    summary: summary,
+  };
+  const [movielist, setMovielist] = useState(movies);
   return (
     <div className="Movie-App">
-      {movies.map((data) => (
-        <Display
+      <div className="movie-details">
+        <TextField
+          onChange={(mname) => setMoviename(mname.target.value)}
+          label="Enter Movie Name"
+          variant="standard"
+        />
+        <TextField
+          onChange={(mposter) => setPoster(mposter.target.value)}
+          label="Poster Link"
+          variant="standard"
+        />
+        <TextField
+          onChange={(msummary) => setSummary(msummary.target.value)}
+          label="Enter Movie Summary"
+          variant="standard"
+        />
+        <TextField
+          onChange={(mrating) => setRating(mrating.target.value)}
+          label="Rating"
+          variant="standard"
+        />
+        <Button
+          onClick={() => setMovielist([...movielist, movie])}
+          variant="contained"
+        >
+          Add Movie
+        </Button>
+      </div>
+      {movielist.map((data) => (
+        <Displaylist
           name={data.name}
           poster={data.poster}
           rating={data.rating}
@@ -78,7 +118,7 @@ export function Movie() {
   );
 }
 
-function Display({ name, poster, rating, summary }) {
+function Displaylist({ name, poster, rating, summary }) {
   const [show, setShow] = useState(true);
   const styles = { color: rating > 8 ? "green" : "blue", fontWeight: "bold" };
   const summaryStyles = { display: show ? "block" : "none" };

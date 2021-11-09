@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { Movie } from "./Movie";
+import { Movielist } from "./Movielist";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
@@ -28,8 +28,8 @@ export default function App() {
         <Msg name={nm.name} image={nm.image} />
       ))} */}
 
-      {/* <Movie /> */}
-      <AddColor />
+      <Movielist />
+      {/* <AddColor /> */}
     </div>
   );
 }
