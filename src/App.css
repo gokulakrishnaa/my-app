@@ -1,5 +1,6 @@
 .display-movie {
   width: 300px;
+  height: min-content;
 }
 
 .movie-poster {
@@ -17,6 +18,7 @@
 .movie-name {
   font-size: 24px;
   margin: 0px;
+  max-width: 75%;
 }
 
 .movie-rating {
@@ -52,6 +54,10 @@ body {
   margin-bottom: 10px;
 }
 
+.add_color {
+  margin: 30px;
+}
+
 .color-details {
   display: flex;
   flex-direction: column;
@@ -59,12 +65,38 @@ body {
   width: 200px;
 }
 
+.add_movie-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
 .movie-details {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 80%;
+  width: 50%;
   justify-content: center;
   margin: 20px;
   padding: 10px;
+}
+
+.navbar {
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  margin: 30px;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.not-found {
+  display: flex;
+  justify-content: center;
+}
+
+.details-container {
+  padding: 20px;
+  max-width: 60%;
 }
