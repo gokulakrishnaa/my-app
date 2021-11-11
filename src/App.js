@@ -5,6 +5,8 @@ import { AddColor } from "./AddColor";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import { Notfound } from "./Notfound";
+import { Welcome } from "./Welcome";
 
 export default function App() {
   // const details = [
@@ -111,7 +113,7 @@ export default function App() {
           <Redirect to="/movies" />
         </Route>
         <Route path="/movies/edit/:id">
-          <Editdetails movielist={movielist} />
+          <Editdetails movielist={movielist} setMovielist={setMovielist} />
         </Route>
         <Route path="/movies/:id">
           <Moviedetails movielist={movielist} />
@@ -164,30 +166,6 @@ function Moviedetails({ movielist }) {
         </div>
         <p className="movie-summary">Summary : {movie.summary}</p>
       </div>
-    </div>
-  );
-}
-
-function Notfound() {
-  return (
-    <div className="not-found">
-      <img
-        className="not-found-image"
-        src="https://media.istockphoto.com/vectors/error-page-not-found-vector-id1134840885?k=20&m=1134840885&s=170667a&w=0&h=EP0OXLMqhERM4nCzWRIE8K6w54DZ9qBs6BKcyhSeqp0="
-        alt=""
-      />
-    </div>
-  );
-}
-
-function Welcome() {
-  return (
-    <div>
-      <img
-        class="welcomepage"
-        src="https://t3.ftcdn.net/jpg/03/67/35/72/360_F_367357209_BG07SVnnB4HSHSaMiHajfZhrZZAE859A.jpg"
-        alt=""
-      ></img>
     </div>
   );
 }
@@ -250,17 +228,24 @@ function AddMovie({ setMovielist, movielist }) {
 }
 
 function Editdetails({ setMovielist, movielist }) {
-  const [moviename, setMoviename] = useState("");
-  const [poster, setPoster] = useState("");
-  const [summary, setSummary] = useState("");
-  const [rating, setRating] = useState("");
-  const [trailer, setTrailer] = useState("");
-  const movie = {
-    name: moviename,
-    poster: poster,
-    rating: rating,
-    summary: summary,
-    trailer: trailer,
+  const { id } = useParams();
+  const movie = movielist[id];
+  const [moviename, setMoviename] = useState(movie.name);
+  const [poster, setPoster] = useState(movie.poster);
+  const [summary, setSummary] = useState(movie.summary);
+  const [rating, setRating] = useState(movie.rating);
+  const [trailer, setTrailer] = useState(movie.trailer);
+  const editMovie = () => {
+    const updatedmovie = {
+      name: moviename,
+      poster: poster,
+      rating: rating,
+      summary: summary,
+      trailer: trailer,
+    };
+    const copyMovieList = [...movielist];
+    copyMovieList[id] = updatedmovie;
+    setMovielist(copyMovieList);
   };
 
   return (
@@ -269,32 +254,34 @@ function Editdetails({ setMovielist, movielist }) {
         <TextField
           value={moviename}
           onChange={(mname) => setMoviename(mname.target.value)}
+          label="Name"
           variant="standard"
         />
         <TextField
           value={poster}
           onChange={(mposter) => setPoster(mposter.target.value)}
+          label="Poster"
           variant="standard"
         />
         <TextField
           value={summary}
           onChange={(msummary) => setSummary(msummary.target.value)}
+          label="Summary"
           variant="standard"
         />
         <TextField
           value={rating}
           onChange={(mrating) => setRating(mrating.target.value)}
+          label="Rating"
           variant="standard"
         />
         <TextField
           value={trailer}
           onChange={(mtrailer) => setTrailer(mtrailer.target.value)}
+          label="Trailer"
           variant="standard"
         />
-        <Button
-          onClick={() => setMovielist([...movielist, movie])}
-          variant="contained"
-        >
+        <Button onClick={editMovie} variant="contained">
           Save
         </Button>
       </div>
