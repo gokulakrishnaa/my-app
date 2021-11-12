@@ -40,6 +40,7 @@ export function Movietask({ movielist, setMovielist }) {
           }
           editbutton={
             <IconButton
+              style={{ marginLeft: "auto" }}
               onClick={() => {
                 history.push("/movies/edit/" + index);
               }}

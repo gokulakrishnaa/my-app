@@ -1,12 +1,13 @@
 import "./App.css";
 import { Movietask } from "./Movietask";
-import { Switch, Route, Link, Redirect, useParams } from "react-router-dom";
+import { Switch, Route, Link, Redirect } from "react-router-dom";
 import { AddColor } from "./AddColor";
 import { useState } from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import { Notfound } from "./Notfound";
 import { Welcome } from "./Welcome";
+import { Editdetails } from "./Editdetails";
+import { AddMovie } from "./AddMovie";
+import { Moviedetails } from "./Moviedetails";
 
 export default function App() {
   // const details = [
@@ -135,156 +136,6 @@ export default function App() {
       {/* {details.map((nm) => (
         <Msg name={nm.name} image={nm.image} />
       ))} */}
-    </div>
-  );
-}
-
-function Moviedetails({ movielist }) {
-  const { id } = useParams();
-  const movie = movielist[id];
-  const styles = {
-    color: movie.rating > 8 ? "green" : "blue",
-    fontWeight: "bold",
-  };
-  return (
-    <div>
-      <iframe
-        width="1000"
-        height="600"
-        src={movie.trailer}
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-      <div className="details-container">
-        <div className="movie-specs">
-          <h3 className="movie-name">{movie.name}</h3>
-          <p className="movie-rating" style={styles}>
-            ⭐ {movie.rating}
-          </p>
-        </div>
-        <p className="movie-summary">Summary : {movie.summary}</p>
-      </div>
-    </div>
-  );
-}
-
-function AddMovie({ setMovielist, movielist }) {
-  const [moviename, setMoviename] = useState("");
-  const [poster, setPoster] = useState("");
-  const [summary, setSummary] = useState("");
-  const [rating, setRating] = useState("");
-  const [trailer, setTrailer] = useState("");
-  const movie = {
-    name: moviename,
-    poster: poster,
-    rating: rating,
-    summary: summary,
-    trailer: trailer,
-  };
-  return (
-    <div className="add_movie-container">
-      <div className="movie-details">
-        <TextField
-          value={moviename}
-          onChange={(mname) => setMoviename(mname.target.value)}
-          label="Enter Movie Name"
-          variant="standard"
-        />
-        <TextField
-          value={poster}
-          onChange={(mposter) => setPoster(mposter.target.value)}
-          label="Poster Link"
-          variant="standard"
-        />
-        <TextField
-          value={summary}
-          onChange={(msummary) => setSummary(msummary.target.value)}
-          label="Enter Movie Summary"
-          variant="standard"
-        />
-        <TextField
-          value={rating}
-          onChange={(mrating) => setRating(mrating.target.value)}
-          label="Rating"
-          variant="standard"
-        />
-        <TextField
-          value={trailer}
-          onChange={(mtrailer) => setTrailer(mtrailer.target.value)}
-          label="Trailer"
-          variant="standard"
-        />
-        <Button
-          onClick={() => setMovielist([...movielist, movie])}
-          variant="contained"
-        >
-          Add Movie
-        </Button>
-      </div>
-    </div>
-  );
-}
-
-function Editdetails({ setMovielist, movielist }) {
-  const { id } = useParams();
-  const movie = movielist[id];
-  const [moviename, setMoviename] = useState(movie.name);
-  const [poster, setPoster] = useState(movie.poster);
-  const [summary, setSummary] = useState(movie.summary);
-  const [rating, setRating] = useState(movie.rating);
-  const [trailer, setTrailer] = useState(movie.trailer);
-  const editMovie = () => {
-    const updatedmovie = {
-      name: moviename,
-      poster: poster,
-      rating: rating,
-      summary: summary,
-      trailer: trailer,
-    };
-    const copyMovieList = [...movielist];
-    copyMovieList[id] = updatedmovie;
-    setMovielist(copyMovieList);
-  };
-
-  return (
-    <div className="add_movie-container">
-      <div className="movie-details">
-        <TextField
-          value={moviename}
-          onChange={(mname) => setMoviename(mname.target.value)}
-          label="Name"
-          variant="standard"
-        />
-        <TextField
-          value={poster}
-          onChange={(mposter) => setPoster(mposter.target.value)}
-          label="Poster"
-          variant="standard"
-        />
-        <TextField
-          value={summary}
-          onChange={(msummary) => setSummary(msummary.target.value)}
-          label="Summary"
-          variant="standard"
-        />
-        <TextField
-          value={rating}
-          onChange={(mrating) => setRating(mrating.target.value)}
-          label="Rating"
-          variant="standard"
-        />
-        <TextField
-          value={trailer}
-          onChange={(mtrailer) => setTrailer(mtrailer.target.value)}
-          label="Trailer"
-          variant="standard"
-        />
-        <Button onClick={editMovie} variant="contained">
-          Save
-        </Button>
-      </div>
     </div>
   );
 }
