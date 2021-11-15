@@ -127,4 +127,17 @@ body {
   min-height: 100vh;
   justify-content: center;
   align-items: center;
+  background-image: linear-gradient(
+    to right top,
+    #051937,
+    #004d7a,
+    #008793,
+    #00bf72,
+    #a8eb12
+  );
+}
+
+.game-title {
+  font-size: 35px;
+  color: black;
 }

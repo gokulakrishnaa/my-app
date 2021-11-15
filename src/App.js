@@ -214,44 +214,6 @@ export default function App() {
   );
 }
 
-// function TicTacToe() {
-//   const [board, setBoard] = useState([
-//     null,
-//     null,
-//     null,
-//     null,
-//     null,
-//     null,
-//     null,
-//     null,
-//     null,
-//   ]);
-//   const [isXTurn, setIsXTurn] = useState(true);
-//   const handleClick = (index) => {
-//     const boardCopy = [...board];
-//     boardCopy[index] = isXTurn ? "X" : "O";
-//     setBoard(boardCopy);
-//     setIsXTurn(!isXTurn);
-//   };
-//   return (
-//     <div className="board">
-//       {board.map((val, index) => (
-//         <GameBox val={val} onPlayerClick={() => handleClick(index)} />
-//       ))}
-//     </div>
-//   );
-// }
-
-// function GameBox({ onPlayerClick, val }) {
-//   const [val, setVal] = useState(null);
-//   const styles = { color: val === "X" ? "green" : "red" };
-//   return (
-//     <div onClick={onPlayerClick} style={styles} className="game-box">
-//       {val}
-//     </div>
-//   );
-// }
-
 function TicTacToe() {
   const { width, height } = useWindowSize();
   const [board, setBoard] = useState([
@@ -300,6 +262,7 @@ function TicTacToe() {
 
   return (
     <div className="full-game">
+      <h2 className="game-title">Tic - Tac - Toe</h2>
       {winner ? <Confetti width={width} height={height} /> : ""}
       <div className="board">
         {board.map((val, index) => (
