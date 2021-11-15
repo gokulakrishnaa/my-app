@@ -1,6 +1,6 @@
 import "./App.css";
 import { Movietask } from "./Movietask";
-import { Switch, Route, Link, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { AddColor } from "./AddColor";
 import { useState } from "react";
 import { Notfound } from "./Notfound";
@@ -8,6 +8,16 @@ import { Welcome } from "./Welcome";
 import { Editdetails } from "./Editdetails";
 import { AddMovie } from "./AddMovie";
 import { Moviedetails } from "./Moviedetails";
+import { useHistory } from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import Paper from "@mui/material/Paper";
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
 
 export default function App() {
   // const details = [
@@ -96,46 +106,217 @@ export default function App() {
         "Cobb steals information from his targets by entering their dreams. Saito offers to wipe clean Cobb's criminal history as payment for performing an inception on his sick competitor's son.",
     },
   ];
-
+  const history = useHistory();
   const [movielist, setMovielist] = useState(movies);
+  const [mode, setMode] = useState("dark");
+  const theme = createTheme({
+    palette: {
+      mode: mode,
+    },
+  });
   return (
-    <div className="App">
-      <nav className="navbar">
+    <ThemeProvider theme={theme}>
+      <Paper elevation={3} style={{ borderRadius: "0px", minHeight: "100vh" }}>
+        <div className="App">
+          <AppBar position="static" style={{ marginBottom: "20px" }}>
+            <Toolbar variant="dense">
+              <Button
+                variant="text"
+                color="inherit"
+                onClick={() => history.push("/")}
+              >
+                Home
+              </Button>
+              <Button
+                variant="text"
+                color="inherit"
+                onClick={() => history.push("/movies")}
+              >
+                Movies
+              </Button>
+              <Button
+                variant="text"
+                color="inherit"
+                onClick={() => history.push("/addmovies")}
+              >
+                Add Movies
+              </Button>
+              <Button
+                variant="text"
+                color="inherit"
+                onClick={() => history.push("/colorgame")}
+              >
+                Color Game
+              </Button>
+              <Button
+                variant="text"
+                color="inherit"
+                onClick={() => history.push("/tictactoe")}
+              >
+                Tic-Tac-Toe
+              </Button>
+              <Button
+                startIcon={
+                  mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />
+                }
+                style={{ marginLeft: "auto" }}
+                variant="text"
+                color="inherit"
+                onClick={() => setMode(mode === "light" ? "dark" : "light")}
+              >
+                {mode === "light" ? "Dark" : "Light"} Mode
+              </Button>
+            </Toolbar>
+          </AppBar>
+
+          {/* <nav className="navbar">
         <Link to="/">Home</Link>
         <Link to="/movies">Movies</Link>
         <Link to="/addmovies">Add Movie</Link>
         <Link to="/colorgame">Color Game</Link>
-      </nav>
-      <Switch>
-        <Route exact path="/">
-          <Welcome />
-        </Route>
-        <Route path="/films">
-          <Redirect to="/movies" />
-        </Route>
-        <Route path="/movies/edit/:id">
-          <Editdetails movielist={movielist} setMovielist={setMovielist} />
-        </Route>
-        <Route path="/movies/:id">
-          <Moviedetails movielist={movielist} />
-        </Route>
-        <Route path="/movies">
-          <Movietask movielist={movielist} setMovielist={setMovielist} />
-        </Route>
-        <Route path="/colorgame">
-          <AddColor />
-        </Route>
-        <Route path="/addmovies">
-          <AddMovie movielist={movielist} setMovielist={setMovielist} />
-        </Route>
-        <Route path="**">
-          <Notfound />
-        </Route>
-      </Switch>
+        </nav> */}
+          <Switch>
+            <Route exact path="/">
+              <Welcome />
+            </Route>
+            <Route path="/films">
+              <Redirect to="/movies" />
+            </Route>
+            <Route path="/movies/edit/:id">
+              <Editdetails movielist={movielist} setMovielist={setMovielist} />
+            </Route>
+            <Route path="/movies/:id">
+              <Moviedetails movielist={movielist} />
+            </Route>
+            <Route path="/movies">
+              <Movietask movielist={movielist} setMovielist={setMovielist} />
+            </Route>
+            <Route path="/colorgame">
+              <AddColor />
+            </Route>
+            <Route path="/tictactoe">
+              <TicTacToe />
+            </Route>
+            <Route path="/addmovies">
+              <AddMovie movielist={movielist} setMovielist={setMovielist} />
+            </Route>
+            <Route path="**">
+              <Notfound />
+            </Route>
+          </Switch>
 
-      {/* {details.map((nm) => (
+          {/* {details.map((nm) => (
         <Msg name={nm.name} image={nm.image} />
       ))} */}
+        </div>
+      </Paper>
+    </ThemeProvider>
+  );
+}
+
+// function TicTacToe() {
+//   const [board, setBoard] = useState([
+//     null,
+//     null,
+//     null,
+//     null,
+//     null,
+//     null,
+//     null,
+//     null,
+//     null,
+//   ]);
+//   const [isXTurn, setIsXTurn] = useState(true);
+//   const handleClick = (index) => {
+//     const boardCopy = [...board];
+//     boardCopy[index] = isXTurn ? "X" : "O";
+//     setBoard(boardCopy);
+//     setIsXTurn(!isXTurn);
+//   };
+//   return (
+//     <div className="board">
+//       {board.map((val, index) => (
+//         <GameBox val={val} onPlayerClick={() => handleClick(index)} />
+//       ))}
+//     </div>
+//   );
+// }
+
+// function GameBox({ onPlayerClick, val }) {
+//   const [val, setVal] = useState(null);
+//   const styles = { color: val === "X" ? "green" : "red" };
+//   return (
+//     <div onClick={onPlayerClick} style={styles} className="game-box">
+//       {val}
+//     </div>
+//   );
+// }
+
+function TicTacToe() {
+  const { width, height } = useWindowSize();
+  const [board, setBoard] = useState([
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ]);
+
+  const [isXTurn, setIsXTurn] = useState(true);
+  const decideWinner = (board) => {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (board[a] !== null && board[a] === board[b] && board[b] === board[c]) {
+        console.log("Winner is", board[a]);
+        return board[a];
+      }
+    }
+    return null;
+  };
+  const winner = decideWinner(board);
+  const handleClick = (index) => {
+    if (winner === null && !board[index]) {
+      const boardCopy = [...board];
+      boardCopy[index] = isXTurn ? "X" : "O";
+      setBoard(boardCopy);
+      setIsXTurn(!isXTurn);
+    }
+  };
+
+  return (
+    <div className="full-game">
+      {winner ? <Confetti width={width} height={height} /> : ""}
+      <div className="board">
+        {board.map((val, index) => (
+          <GameBox val={val} onPlayerClick={() => handleClick(index)} />
+        ))}
+      </div>
+      {winner ? <h2>Winner is : {winner}</h2> : ""}
+    </div>
+  );
+}
+
+function GameBox({ onPlayerClick, val }) {
+  // const [val, setVal] = useState(null);
+  const styles = { color: val === "X" ? "green" : "red" };
+  return (
+    <div onClick={onPlayerClick} style={styles} className="game-box">
+      {val}
     </div>
   );
 }
