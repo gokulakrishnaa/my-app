@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
-export function AddMovie({ setMovielist, movielist }) {
+export function AddMovie() {
   const history = useHistory();
   const [moviename, setMoviename] = useState("");
   const [poster, setPoster] = useState("");
@@ -18,8 +18,15 @@ export function AddMovie({ setMovielist, movielist }) {
       summary: summary,
       trailer: trailer,
     };
-    setMovielist([...movielist, movie]);
-    history.push("/movies");
+    // setMovielist([...movielist, movie]);
+
+    fetch(`https://616a3fa516e7120017fa0ee6.mockapi.io/movies`, {
+      method: "POST",
+      body: JSON.stringify(movie),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(() => history.push("/movies"));
   };
   return (
     <div className="add_movie-container">

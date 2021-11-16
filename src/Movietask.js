@@ -10,28 +10,48 @@ import InfoIcon from "@mui/icons-material/Info";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useHistory } from "react-router-dom";
+import { useEffect } from "react";
 
-export function Movietask({ movielist, setMovielist }) {
+export function Movietask() {
+  const [movielist, setMovielist] = useState([]);
+
+  const getMovies = () => {
+    fetch("https://616a3fa516e7120017fa0ee6.mockapi.io/movies")
+      .then((data) => data.json())
+      .then((mvs) => setMovielist(mvs));
+  };
+
+  useEffect(getMovies, []);
+
+  const deleteMovies = (id) => {
+    fetch(`https://616a3fa516e7120017fa0ee6.mockapi.io/movies/${id}`, {
+      method: "DELETE",
+    }).then(() => getMovies());
+  };
+
   const history = useHistory();
   return (
     <div className="Movie-App">
-      {movielist.map(({ name, rating, poster, summary, trailer }, index) => (
+      {movielist.map(({ name, rating, poster, summary, trailer, id }) => (
         <Displaylist
+          key={id}
           name={name}
           poster={poster}
           rating={rating}
           summary={summary}
           trailer={trailer}
-          id={index}
+          id={id}
           deletebutton={
             <IconButton
               onClick={() => {
-                const deleteindex = index;
-                const remainingMovies = movielist.filter(
-                  (mv, idx) => idx !== deleteindex
-                );
-                setMovielist(remainingMovies);
+                deleteMovies(id);
               }}
+              //   const deleteindex = index;
+              //   const remainingMovies = movielist.filter(
+              //     (mv, idx) => idx !== deleteindex
+              //   );
+              //   setMovielist(remainingMovies);
+              // }}
               color="error"
               aria-label="delete-movie"
             >
@@ -42,7 +62,7 @@ export function Movietask({ movielist, setMovielist }) {
             <IconButton
               style={{ marginLeft: "auto" }}
               onClick={() => {
-                history.push("/movies/edit/" + index);
+                history.push("/movies/edit/" + id);
               }}
               color="secondary"
               aria-label="edit-movie"
