@@ -11,12 +11,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
+import { API_URL } from "./global-constants";
 
 export function Movietask() {
   const [movielist, setMovielist] = useState([]);
 
   const getMovies = () => {
-    fetch("https://616a3fa516e7120017fa0ee6.mockapi.io/movies")
+    fetch(`${API_URL}/movies`)
       .then((data) => data.json())
       .then((mvs) => setMovielist(mvs));
   };
@@ -24,7 +25,7 @@ export function Movietask() {
   useEffect(getMovies, []);
 
   const deleteMovies = (id) => {
-    fetch(`https://616a3fa516e7120017fa0ee6.mockapi.io/movies/${id}`, {
+    fetch(`${API_URL}/movies/${id}`, {
       method: "DELETE",
     }).then(() => getMovies());
   };
@@ -32,19 +33,19 @@ export function Movietask() {
   const history = useHistory();
   return (
     <div className="Movie-App">
-      {movielist.map(({ name, rating, poster, summary, trailer, id }) => (
+      {movielist.map(({ name, rating, poster, summary, trailer, id, _id }) => (
         <Displaylist
-          key={id}
+          key={_id}
           name={name}
           poster={poster}
           rating={rating}
           summary={summary}
           trailer={trailer}
-          id={id}
+          id={_id}
           deletebutton={
             <IconButton
               onClick={() => {
-                deleteMovies(id);
+                deleteMovies(_id);
               }}
               //   const deleteindex = index;
               //   const remainingMovies = movielist.filter(
@@ -62,7 +63,7 @@ export function Movietask() {
             <IconButton
               style={{ marginLeft: "auto" }}
               onClick={() => {
-                history.push("/movies/edit/" + id);
+                history.push("/movies/edit/" + _id);
               }}
               color="secondary"
               aria-label="edit-movie"
