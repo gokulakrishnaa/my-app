@@ -114,18 +114,11 @@ function Displaylist({
             ⭐ {rating}
           </p>
         </div>
-        {/* <Button
-        onClick={() => setShow(!show)}
-        className="description"
-        variant="outlined"
-      >
-        {show ? "Hide" : "Show"} Description
-      </Button> */}
 
         <p className="movie-summary" style={summaryStyles}>
           Summary : {summary}
         </p>
-        {/* {show ? <p className="movie-summary">Summary : {summary}</p> : ""} */}
+
         <CardActions>
           <Counter /> {editbutton} {deletebutton}
         </CardActions>

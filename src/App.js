@@ -17,27 +17,8 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Paper from "@mui/material/Paper";
 import { TicTacToe } from "./TicTacToe";
-import { Basicform } from "./Basicform";
 
 export default function App() {
-  // const details = [
-  //   {
-  //     name: "gokul",
-  //     image:
-  //       "https://hs-marketing.imgix.net/images/blog/steve-jobs.jpg?auto=compress&fit=scale&w=1600&dpr=1",
-  //   },
-  //   {
-  //     name: "steve",
-  //     image:
-  //       "https://hs-marketing.imgix.net/images/blog/steve-jobs.jpg?auto=compress&fit=scale&w=1600&dpr=1",
-  //   },
-  //   {
-  //     name: "elon",
-  //     image:
-  //       "https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5OTk2ODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg",
-  //   },
-  // ];
-
   const history = useHistory();
   const [mode, setMode] = useState("dark");
   const theme = createTheme({
@@ -45,12 +26,6 @@ export default function App() {
       mode: mode,
     },
   });
-
-  // useEffect(() => {
-  //   fetch("https://616a3fa516e7120017fa0ee6.mockapi.io/movies")
-  //     .then((data) => data.json())
-  //     .then((mvs) => setMovielist(mvs));
-  // }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -94,13 +69,6 @@ export default function App() {
                 Tic-Tac-Toe
               </Button>
               <Button
-                variant="text"
-                color="inherit"
-                onClick={() => history.push("/form")}
-              >
-                Basic Form
-              </Button>
-              <Button
                 startIcon={
                   mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />
                 }
@@ -114,12 +82,6 @@ export default function App() {
             </Toolbar>
           </AppBar>
 
-          {/* <nav className="navbar">
-        <Link to="/">Home</Link>
-        <Link to="/movies">Movies</Link>
-        <Link to="/addmovies">Add Movie</Link>
-        <Link to="/colorgame">Color Game</Link>
-        </nav> */}
           <Switch>
             <Route exact path="/">
               <Welcome />
@@ -145,17 +107,10 @@ export default function App() {
             <Route path="/addmovies">
               <AddMovie />
             </Route>
-            <Route path="/form">
-              <Basicform />
-            </Route>
             <Route path="**">
               <Notfound />
             </Route>
           </Switch>
-
-          {/* {details.map((nm) => (
-        <Msg name={nm.name} image={nm.image} />
-      ))} */}
         </div>
       </Paper>
     </ThemeProvider>
