@@ -1,7 +1,6 @@
 import "./App.css";
 import { Movietask } from "./Movietask";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { AddColor } from "./AddColor";
 import { useState } from "react";
 import { Notfound } from "./Notfound";
 import { Welcome } from "./Welcome";
@@ -57,13 +56,6 @@ export default function App() {
               <Button
                 variant="text"
                 color="inherit"
-                onClick={() => history.push("/colorgame")}
-              >
-                Color Game
-              </Button>
-              <Button
-                variant="text"
-                color="inherit"
                 onClick={() => history.push("/tictactoe")}
               >
                 Tic-Tac-Toe
@@ -97,9 +89,6 @@ export default function App() {
             </Route>
             <Route path="/movies">
               <Movietask />
-            </Route>
-            <Route path="/colorgame">
-              <AddColor />
             </Route>
             <Route path="/tictactoe">
               <TicTacToe />
